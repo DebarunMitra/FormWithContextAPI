@@ -1,5 +1,5 @@
-import axios from 'axios';
-import {CreateCustom} from "./LsApiLibrary";
+import { v4 as uuidv4 } from "uuid";
+//uuidv4();
 
 const getCampaignDetails = (paramKeyValue) => {
   if (window.location.href.split("?")[1]) {
@@ -12,41 +12,5 @@ const getCampaignDetails = (paramKeyValue) => {
 };
 
 export const registerUserInLs = async (name, email, phone, activityCode) => {
-  const payload = {
-    LeadDetails: [
-      {
-        Attribute: "EmailAddress",
-        Value: email,
-      },
-      {
-        Attribute: "Phone",
-        Value: phone,
-      },
-      {
-        Attribute: "FirstName",
-        Value: name,
-      },
-      {
-        Attribute: "Source",
-        Value: getCampaignDetails("source"),
-      },
-      {
-        Attribute: "mx_Source_Campaign_Id",
-        Value: getCampaignDetails("utm_source-campaign"),
-      },
-      {
-        Attribute: "SearchBy",
-        Value: "Phone",
-      },
-    ],
-    Activity: {
-      ActivityEvent: activityCode,
-      ActivityNote: "User Registration",
-    },
-  };
-
-  console.log(payload);
-  const apiResponse = await axios.post(CreateCustom, payload);
-  console.log(apiResponse);
-  return apiResponse.data;
+ console.log(`${uuidv4()} ${name} ${email} ${phone} ${activityCode}`); 
 };

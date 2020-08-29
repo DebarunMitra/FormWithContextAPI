@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import LsIntegrationContext from '../Contexts/LsIntegrationContext';
+import { registerUserInLs } from "../LsApiProvider/LsApiManager";
 
 const ClRegisterForm = (props) =>{
   const {formState, formDispatch} = useContext(LsIntegrationContext);
@@ -26,15 +27,25 @@ const ClRegisterForm = (props) =>{
        formDispatch({
          type: "Registering",
          registerStatus: true,
-         activityCode: e.target.getAttribute("data-page-code"),
        });
+        registerUserInLs(
+          formState.name,
+          formState.email,
+          formState.phone,
+          props.pageCode
+        );
+        setTimeout(() => {
+          formDispatch({
+            type: "OnSuccessRegister",
+          });
+        }, 1000);
     }
   }
   return (
     <div id="pap-form-1" className="wrap" style={{ display: "block" }}>
       <h3 className="heading">Want more details? Contact us!</h3>
       {formState.responseStatus ? (
-        <p id="completeProcess">{formState.responseMsg}</p>
+        <p className="heading">{formState.responseMsg}</p>
       ) : (
         <form
           onSubmit={(e) => handleOnSubmit(e)}
