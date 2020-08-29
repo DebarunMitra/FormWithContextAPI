@@ -1,0 +1,1 @@
+export const CreateCustom = `https://api-in21.leadsquared.com/v2/ProspectActivity.svc/CreateCustom?accessKey=u$r6984262b6c0dfa2372a61753f3efaad4&secretKey=413eaf582d42530653f15f6059be5a23a8aaaeae`;
